@@ -2,6 +2,8 @@ package com.splitify.mvc.split
 
 import com.splitify.mvc.friends.Friend
 import com.splitify.mvc.friends.FriendsRepository
+import com.splitify.mvc.mondo.ApiConfig
+import groovyx.net.http.RESTClient
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,12 +19,10 @@ class SplitService {
 
     def split(SplitRequest splitRequest) {
 
-        // go to mondo to retrieve transaction info
-        Integer amount = -1000
+        Integer amount = retrieveTransactionAmount(ApiConfig.ACCESS_TOKEN, splitRequest.transactionId)
 
         List<Friend> friendsToSplit = friendRepository.retrieveFriends(splitRequest.friends)
 
-        // divide amount by friends to pay
         Integer amountPerFriend = amount / (friendsToSplit.size() + 1)
 
         friendsToSplit.each { friend ->
@@ -33,5 +33,16 @@ class SplitService {
         // persist split operation
     }
 
+    private Integer retrieveTransactionAmount(String authToken, String transactionId) {
+
+        def mondoClient = new RESTClient(ApiConfig.URL)
+        mondoClient.defaultRequestHeaders['Authorization'] = "Bearer $authToken"
+
+        def response = mondoClient.get(
+                path: "/transactions/$transactionId",
+        )
+
+        return response.responseData.transaction.amount ?: 0
+    }
 
 }
