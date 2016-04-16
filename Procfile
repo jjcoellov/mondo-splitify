@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* Main
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* -jar build/libs/splitify-1.0-SNAPSHOT.jar
