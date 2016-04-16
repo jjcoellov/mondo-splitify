@@ -1,10 +1,12 @@
 package com.splitify.mvc.feed
 
 import com.splitify.mvc.client.MondoAPIClient
+import com.splitify.mvc.friends.FriendsRepository
 import com.splitify.mvc.webhook.WebhookEvent
 import groovyx.net.http.RESTClient
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 import static groovyx.net.http.ContentType.URLENC
@@ -12,8 +14,10 @@ import static groovyx.net.http.ContentType.URLENC
 @Service
 class FeedService {
 
-
     private static final Logger logger = LogManager.getLogger(FeedService);
+
+    @Autowired
+    FriendsRepository friendsRepository
 
     void createDummyFeed(String accountId, String accessToken = null) {
         logger.info("Creating feed for account $accountId")
@@ -23,8 +27,8 @@ class FeedService {
     void sendSplitAsk(WebhookEvent transaction) {
         logger.info("Creating split ask feed for account")
 
-        def accessToken = null //TODO?
         def accountId = transaction.accountId
+        def accessToken = friendsRepository.getFriendByAccountId(accountId).accessToken
         def title = "Do you want to split your ${transaction.amount} ${transaction.currency} transaction?"
         sendFeed(accountId,title,"http://google.com","http://www.nyan.cat/cats/original.gif", accessToken)
     }

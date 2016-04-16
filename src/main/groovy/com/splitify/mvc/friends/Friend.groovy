@@ -8,4 +8,6 @@ class Friend {
 
     String accountId
 
+    String accessToken
+
 }

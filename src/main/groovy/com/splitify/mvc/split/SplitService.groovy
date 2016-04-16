@@ -13,14 +13,13 @@ class SplitService {
 
     private static final Logger logger = LogManager.getLogger(SplitService);
 
-    static final String ACC_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0NjA5ODEyMTcsImlhdCI6MTQ2MDgwODQxNywianRpIjoidG9rXzAwMDA5N0Z2dlhXdWxMR3NVczlqdFoiLCJ1aSI6InVzZXJfMDAwMDk3RnZidXdNMHZEUEVwR09PWCIsInYiOiI0In0.DlWlJ3TsRNz8TVFjpn2H653d9N4ZXgthd86GfcyckUI"
-
     @Autowired
     FriendsRepository friendRepository
 
     def split(SplitRequest splitRequest) {
 
-        Integer amount = retrieveTransactionAmount(ACC_TOKEN, splitRequest.transactionId)
+        String accessToken = friendRepository.getFriendByAccountId(splitRequest.accountId).accessToken
+        Integer amount = retrieveTransactionAmount(accessToken, splitRequest.transactionId)
 
         List<Friend> friendsToSplit = friendRepository.retrieveFriends(splitRequest.friends)
 
