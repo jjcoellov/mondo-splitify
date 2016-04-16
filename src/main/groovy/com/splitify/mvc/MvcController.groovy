@@ -3,6 +3,8 @@ package com.splitify.mvc
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -21,10 +23,15 @@ class MvcController {
         return "Hello World!"
     }
 
+    @RequestMapping("/greeting")
+    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name)
+        return "greetingView"
+    }
+
     @RequestMapping(value = "/notify", method = RequestMethod.POST)
     void receive(@RequestBody String event, HttpServletResponse response) {
         logger.info(event)
         response.status = HttpServletResponse.SC_ACCEPTED
     }
-
 }
