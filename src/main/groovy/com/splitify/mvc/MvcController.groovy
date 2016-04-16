@@ -1,6 +1,7 @@
 package com.splitify.mvc
 
 import com.splitify.mvc.feed.FeedService
+import com.splitify.mvc.friends.FriendsRepository
 import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.split.SplitService
 import com.splitify.mvc.webhook.WebhookEvent
@@ -29,21 +30,24 @@ class MvcController {
     @Autowired
     FeedService feedService
 
+    @Autowired
+    FriendsRepository friendsRepository
+
     @RequestMapping(value = "/")
     def @ResponseBody hello() {
         logger.info("Hello World")
         return "Hello World!"
     }
 
-    @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="transactionId", required=true) String transactionId,
+    @RequestMapping("/splitAsk")
+    public String splitAsk(@RequestParam(value="transactionId", required=true) String transactionId,
                            @RequestParam(value="accountId", required=true) String accountId,
                            Model model) {
         model.addAttribute("transactionId", transactionId)
         model.addAttribute("accountId", accountId)
-        model.addAttribute("friends", [[userId: "11111", name: "Name 1"],[userId: "22222", name: "Name 2"],[userId: "33333", name: "Name 3"]])
-    //    model.addAttribute("splitRequest", new SplitRequest())
-        return "greetingView"
+        model.addAttribute("myFriends", friendsRepository.retrieveFriendsExcludingByAccount(accountId))
+        model.addAttribute("splitRequest", new SplitRequest())
+        return "splitAskView"
     }
 
     @RequestMapping(value = "/notify", method = RequestMethod.POST)
