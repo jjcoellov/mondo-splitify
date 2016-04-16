@@ -1,5 +1,6 @@
 package com.splitify.mvc.feed
 
+import com.splitify.mvc.client.MondoAPIClient
 import groovyx.net.http.RESTClient
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
@@ -10,17 +11,17 @@ import static groovyx.net.http.ContentType.URLENC
 @Service
 class FeedService {
 
+
     private static final Logger logger = LogManager.getLogger(FeedService);
 
-    void createDummyFeed(String accountId) {
+    void createDummyFeed(String accountId, String accessToken = null) {
         logger.info("Creating feed for account $accountId")
-        sendFeed(accountId,"test","http://google.com","http://www.nyan.cat/cats/original.gif")
+        sendFeed(accountId,"test","http://google.com","http://www.nyan.cat/cats/original.gif",accessToken)
     }
 
-    private sendFeed(String accountId,String title, String URL, String imageURL) {
+    private sendFeed(String accountId,String title, String URL, String imageURL, String accessToken = null) {
 
-        def mondoClient = new RESTClient("https://staging-api.gmon.io/")
-        mondoClient.defaultRequestHeaders['Authorization'] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0NjA5Nzg2ODksImlhdCI6MTQ2MDgwNTg4OSwianRpIjoidG9rXzAwMDA5N0ZzQVFyUFJTR1RkYk11Q3YiLCJ1aSI6InVzZXJfMDAwMDk3RnJHS1ZWc01ad0xVOXg0YiIsInYiOiI0In0.2-x9BJLQ-nqEX_I3K4rptVCimYbbKGCTpXxxMblpk4Y"
+        def mondoClient = getFeedClient(accessToken)
 
         def response = mondoClient.post(
                 path:"/feed",
@@ -33,6 +34,10 @@ class FeedService {
                 ],
                 requestContentType: URLENC
         )
+    }
+
+    RESTClient getFeedClient(String accessToken) {
+        return  new MondoAPIClient(accessToken)
     }
 
 }
