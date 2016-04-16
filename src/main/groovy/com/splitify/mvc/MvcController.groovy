@@ -1,5 +1,6 @@
 package com.splitify.mvc
 
+import com.splitify.mvc.feed.FeedService
 import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.split.SplitService
 import com.splitify.mvc.webhook.WebhookEvent
@@ -25,6 +26,9 @@ class MvcController {
     @Autowired
     SplitService splitService
 
+    @Autowired
+    FeedService feedService
+
     @RequestMapping(value = "/")
     def @ResponseBody hello() {
         logger.info("Hello World")
@@ -48,6 +52,8 @@ class MvcController {
 
         WebhookEvent event = WebhookEvent.parse(payload)
         logger.info(event)
+
+        feedService.createDummyFeed(event.accountId)
 
         response.status = HttpServletResponse.SC_ACCEPTED
     }

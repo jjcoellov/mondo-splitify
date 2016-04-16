@@ -8,6 +8,8 @@ class WebhookEvent {
 
     String accountId
 
+    String transactionId
+
     String description
 
     String merchantName
@@ -23,6 +25,7 @@ class WebhookEvent {
         def parsedNotification = jsonSlurper.parseText(payload)
         return new WebhookEvent(
                 accountId: parsedNotification.data.account_id,
+                transactionId: parsedNotification.data.id,
                 description: parsedNotification.data.description,
                 merchantName: parsedNotification.data.merchant.name,
                 merchantAddress: parsedNotification.data.merchant.address.short_formatted,
