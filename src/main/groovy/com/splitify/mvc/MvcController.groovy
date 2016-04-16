@@ -1,5 +1,6 @@
 package com.splitify.mvc
 
+import com.splitify.mvc.webhook.WebhookEvent
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.springframework.stereotype.Controller
@@ -30,8 +31,13 @@ class MvcController {
     }
 
     @RequestMapping(value = "/notify", method = RequestMethod.POST)
-    void receive(@RequestBody String event, HttpServletResponse response) {
+    void receive(@RequestBody String payload, HttpServletResponse response) {
+        logger.info("Event received through WebHook: " + payload)
+
+        WebhookEvent event = WebhookEvent.parse(payload)
         logger.info(event)
+
         response.status = HttpServletResponse.SC_ACCEPTED
     }
 }
+
