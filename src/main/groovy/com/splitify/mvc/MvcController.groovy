@@ -1,10 +1,12 @@
 package com.splitify.mvc
 
+import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.webhook.WebhookEvent
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -38,6 +40,15 @@ class MvcController {
         logger.info(event)
 
         response.status = HttpServletResponse.SC_ACCEPTED
+    }
+
+    @RequestMapping(value = "/split", method = RequestMethod.POST)
+    void split(@ModelAttribute SplitRequest splitRequest, HttpServletResponse response) {
+        logger.info("Splitting order " + splitRequest)
+
+
+
+        response.status = HttpServletResponse.SC_CREATED
     }
 }
 
