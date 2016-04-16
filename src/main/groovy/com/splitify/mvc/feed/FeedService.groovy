@@ -1,6 +1,7 @@
 package com.splitify.mvc.feed
 
 import com.splitify.mvc.client.MondoAPIClient
+import com.splitify.mvc.friends.Friend
 import com.splitify.mvc.friends.FriendsRepository
 import com.splitify.mvc.webhook.WebhookEvent
 import groovyx.net.http.RESTClient
@@ -36,9 +37,15 @@ class FeedService {
         sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
     }
 
-    private getAccessToken(WebhookEvent transaction) {
+    void askMoneyToFriend(Friend friend, def amount) {
+        logger.info("Creating money back to friend")
 
+        def accountId = friend.accountId
+        def accessToken = friend.accessToken
+        def title = "Where is my money ($amount £) ?"
 
+        def url = "http://google.com"
+        sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
     }
 
     private sendFeed(String accountId,String title, String URL, String imageURL, String accessToken = null) {

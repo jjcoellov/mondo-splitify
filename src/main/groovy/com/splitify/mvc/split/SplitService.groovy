@@ -1,10 +1,12 @@
 package com.splitify.mvc.split
 
 import com.splitify.mvc.client.MondoAPIClient
+import com.splitify.mvc.feed.FeedService
 import com.splitify.mvc.friends.Friend
 import com.splitify.mvc.friends.FriendsRepository
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
+import org.springframework.beans.factory.annotation.Autowire
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -15,6 +17,9 @@ class SplitService {
 
     @Autowired
     FriendsRepository friendRepository
+
+    @Autowired
+    FeedService feedService
 
     def split(SplitRequest splitRequest) {
 
@@ -27,7 +32,7 @@ class SplitService {
 
         friendsToSplit.each { friend ->
             logger.info(friend.name + " will be notified to pay " + amountPerFriend)
-            // send to create friends feeds
+            feedService.askMoneyToFriend(friend,amount)
         }
 
         // persist split operation
