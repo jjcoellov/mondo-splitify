@@ -10,4 +10,12 @@ class MvcController {
     def @ResponseBody hello() {
         return "Hello World!"
     }
+
+    @RequestMapping(value = "/test")
+    def @ResponseBody test() {
+        return "Hello World! 2"
+    }
+
+
+
 }
