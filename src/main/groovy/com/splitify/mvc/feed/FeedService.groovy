@@ -1,6 +1,7 @@
 package com.splitify.mvc.feed
 
 import com.splitify.mvc.client.MondoAPIClient
+import com.splitify.mvc.webhook.WebhookEvent
 import groovyx.net.http.RESTClient
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
@@ -18,6 +19,16 @@ class FeedService {
         logger.info("Creating feed for account $accountId")
         sendFeed(accountId,"test","http://google.com","http://www.nyan.cat/cats/original.gif",accessToken)
     }
+
+    void sendSplitAsk(WebhookEvent transaction) {
+        logger.info("Creating split ask feed for account")
+
+        def accessToken = null //TODO?
+        def accountId = transaction.accountId
+        def title = "Do you want to split your ${transaction.amount} ${transaction.currency} transaction?"
+        sendFeed(accountId,title,"http://google.com","http://www.nyan.cat/cats/original.gif", accessToken)
+    }
+
 
     private sendFeed(String accountId,String title, String URL, String imageURL, String accessToken = null) {
 
@@ -37,7 +48,8 @@ class FeedService {
     }
 
     RESTClient getFeedClient(String accessToken) {
-        return  new MondoAPIClient(accessToken)
-    }
+    //TODO Load access Token
+    return  new MondoAPIClient(accessToken)
+}
 
 }
