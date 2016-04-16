@@ -9,7 +9,7 @@
     <meta name="author" content=""/>
     <link rel="icon" href="../../favicon.ico"/>
 
-    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <title>Split purchase</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
@@ -31,7 +31,9 @@
 
         <p class="lead">Choose who owns you money!</p>
 
-        <!--<form action="#" th:action="@{/split}" th:object="${splitRequest}" method="post">-->
+        <form action="#" th:action="@{/split}" th:object="${splitRequest}" method="post">
+            <input type="hidden" th:value="${transactionId}" name="transactionId" />
+            <input type="hidden" th:value="${accountId}" name="accountId" />
             <div class="row">
                 <table class="table">
                     <thead>
@@ -40,24 +42,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="friend : ${friends}">
-                        <td th:text="${friend.userId}"></td>
+                    <tr th:each="friend : ${myFriends}">
                         <td th:text="${friend.name}"></td>
-                        <td><input type="checkbox" th:field="*{friends}" th:value="|${friend.userId}|"/></td>
-                        <!--<tr>-->
-                        <!--<td>Juan Manuel Barroso</td>-->
-                        <!--<td><input type="checkbox"/></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td>Juanjo Coello</td>-->
-                        <!--<td><input type="checkbox"/></td>-->
+                        <td><input type="checkbox" th:field="*{friends}" th:value="${friend.id}"/></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Split</a></p>
-        <!--</form>-->
+            <p><input type="submit" value="Split" class="btn btn-lg btn-primary" role="button"/></p>
+        </form>
     </div>
 
 
