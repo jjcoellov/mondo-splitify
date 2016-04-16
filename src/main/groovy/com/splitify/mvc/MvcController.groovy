@@ -57,7 +57,7 @@ class MvcController {
         WebhookEvent event = WebhookEvent.parse(payload)
         logger.info(event)
 
-        feedService.createDummyFeed(event.accountId)
+        feedService.sendSplitAsk(event)
 
         response.status = HttpServletResponse.SC_ACCEPTED
     }
