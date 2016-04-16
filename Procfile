@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* -jar build/libs/splitify-1.0-SNAPSHOT.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* -jar build/libs/splitify-1.0-SNAPSHOT.jar
