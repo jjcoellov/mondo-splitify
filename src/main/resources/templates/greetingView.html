@@ -1,10 +1,64 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="../../favicon.ico"/>
+
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+
+
+    <!-- Custom styles for this template -->
+    <link href="../css/jumbotron-narrow.css" rel="stylesheet"/>
+    <link href="../css/grid.css" rel="stylesheet"/>
+
 </head>
+
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
+
+<div class="container">
+
+
+    <div class="jumbotron">
+        <h2>Split your purchase</h2>
+        <p class="lead">Choose who owns you money!</p>
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Friends:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Juan Manuel Barroso</td>
+                    <td><input type="checkbox"/></td>
+                </tr>
+                <tr>
+                    <td>Juanjo Coello</td>
+                    <td><input type="checkbox"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p><a class="btn btn-lg btn-primary" href="#" role="button">Split</a></p>
+    </div>
+
+
+
+    <footer class="footer">
+        <p>&copy; Splitify, Inc.</p>
+    </footer>
+
+</div> <!-- /container -->
+
 </body>
 </html>
