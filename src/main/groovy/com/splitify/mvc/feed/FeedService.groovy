@@ -30,9 +30,16 @@ class FeedService {
         def accountId = transaction.accountId
         def accessToken = friendsRepository.getFriendByAccountId(accountId).accessToken
         def title = "Do you want to split your ${transaction.amount} ${transaction.currency} transaction?"
-        sendFeed(accountId,title,"http://google.com","http://www.nyan.cat/cats/original.gif", accessToken)
+        def transactionId = transaction.transactionId
+
+        def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}"
+        sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
     }
 
+    private getAccessToken(WebhookEvent transaction) {
+
+
+    }
 
     private sendFeed(String accountId,String title, String URL, String imageURL, String accessToken = null) {
 
