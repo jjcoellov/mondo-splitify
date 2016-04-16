@@ -1,7 +1,7 @@
 package com.splitify.mvc.split
 
 import com.splitify.mvc.friends.Friend
-import com.splitify.mvc.friends.FriendRepository
+import com.splitify.mvc.friends.FriendsRepository
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +13,7 @@ class SplitService {
     private static final Logger logger = LogManager.getLogger(SplitService);
 
     @Autowired
-    FriendRepository friendRepository
+    FriendsRepository friendRepository
 
     def split(SplitRequest splitRequest) {
 

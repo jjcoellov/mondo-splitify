@@ -1,15 +1,19 @@
 package com.splitify.mvc.feed
 
 import groovyx.net.http.RESTClient
+import org.apache.log4j.LogManager
+import org.apache.log4j.Logger
+import org.springframework.stereotype.Service
 
 import static groovyx.net.http.ContentType.URLENC
 
-
+@Service
 class FeedService {
 
-
+    private static final Logger logger = LogManager.getLogger(FeedService);
 
     void createDummyFeed(String accountId) {
+        logger.info("Creating feed for account $accountId")
         sendFeed(accountId,"test","http://google.com","http://www.nyan.cat/cats/original.gif")
     }
 
