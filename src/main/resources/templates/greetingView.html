@@ -28,37 +28,45 @@
 
     <div class="jumbotron">
         <h2>Split your purchase</h2>
+
         <p class="lead">Choose who owns you money!</p>
-        <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Friends:</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Juan Manuel Barroso</td>
-                    <td><input type="checkbox"/></td>
-                </tr>
-                <tr>
-                    <td>Juanjo Coello</td>
-                    <td><input type="checkbox"/></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
 
-        <p><a class="btn btn-lg btn-primary" href="#" role="button">Split</a></p>
+        <!--<form action="#" th:action="@{/split}" th:object="${splitRequest}" method="post">-->
+            <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Friends:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="friend : ${friends}">
+                        <td th:text="${friend.userId}"></td>
+                        <td th:text="${friend.name}"></td>
+                        <td><input type="checkbox" th:field="*{friends}" th:value="|${friend.userId}|"/></td>
+                        <!--<tr>-->
+                        <!--<td>Juan Manuel Barroso</td>-->
+                        <!--<td><input type="checkbox"/></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                        <!--<td>Juanjo Coello</td>-->
+                        <!--<td><input type="checkbox"/></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Split</a></p>
+        <!--</form>-->
     </div>
-
 
 
     <footer class="footer">
         <p>&copy; Splitify, Inc.</p>
     </footer>
 
-</div> <!-- /container -->
+</div>
+<!-- /container -->
 
 </body>
 </html>

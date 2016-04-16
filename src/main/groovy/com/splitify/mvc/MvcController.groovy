@@ -32,8 +32,13 @@ class MvcController {
     }
 
     @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name)
+    public String greeting(@RequestParam(value="transactionId", required=true) String transactionId,
+                           @RequestParam(value="accountId", required=true) String accountId,
+                           Model model) {
+        model.addAttribute("transactionId", transactionId)
+        model.addAttribute("accountId", accountId)
+        model.addAttribute("friends", [[userId: "11111", name: "Name 1"],[userId: "22222", name: "Name 2"],[userId: "33333", name: "Name 3"]])
+    //    model.addAttribute("splitRequest", new SplitRequest())
         return "greetingView"
     }
 
