@@ -1,9 +1,11 @@
 package com.splitify.mvc
 
 import com.splitify.mvc.split.SplitRequest
+import com.splitify.mvc.split.SplitService
 import com.splitify.mvc.webhook.WebhookEvent
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.ModelAttribute
@@ -18,7 +20,10 @@ import javax.servlet.http.HttpServletResponse
 @Controller
 class MvcController {
 
-    private static final Logger logger = LogManager.getLogger("HelloWorld");
+    private static final Logger logger = LogManager.getLogger(MvcController);
+
+    @Autowired
+    SplitService splitService
 
     @RequestMapping(value = "/")
     def @ResponseBody hello() {
@@ -46,7 +51,7 @@ class MvcController {
     void split(@ModelAttribute SplitRequest splitRequest, HttpServletResponse response) {
         logger.info("Splitting order " + splitRequest)
 
-
+        splitService.split(splitRequest)
 
         response.status = HttpServletResponse.SC_CREATED
     }
