@@ -26,7 +26,10 @@ class FeedService {
         def accessToken = null //TODO?
         def accountId = transaction.accountId
         def title = "Do you want to split your ${transaction.amount} ${transaction.currency} transaction?"
-        sendFeed(accountId,title,"http://google.com","http://www.nyan.cat/cats/original.gif", accessToken)
+        def transactionId = transaction.transactionId
+
+        def url = "https://mondo-splitify.herokuapp.com/splitAsk?${transactionId}=1&${accountId}=10"
+        sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
     }
 
 
