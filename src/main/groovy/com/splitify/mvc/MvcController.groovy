@@ -63,12 +63,13 @@ class MvcController {
     }
 
     @RequestMapping(value = "/split", method = RequestMethod.POST)
-    void split(@ModelAttribute SplitRequest splitRequest, HttpServletResponse response) {
+    String split(@ModelAttribute SplitRequest splitRequest, HttpServletResponse response) {
         logger.info("Splitting order " + splitRequest)
 
         splitService.split(splitRequest)
 
         response.status = HttpServletResponse.SC_CREATED
+        return "splitView"
     }
 }
 
