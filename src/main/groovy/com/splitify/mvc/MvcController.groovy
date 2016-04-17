@@ -39,15 +39,16 @@ class MvcController {
     WebhookService webhookService
 
     @RequestMapping(value = "/")
-    def @ResponseBody hello() {
+    def @ResponseBody
+    hello() {
         logger.info("Hello World")
         return "Hello World!"
     }
 
-    @RequestMapping("/splitAsk")
-    public String splitAsk(@RequestParam(value="transactionId", required=true) String transactionId,
-                           @RequestParam(value="accountId", required=true) String accountId,
-                           @RequestParam(value="amount", required=true) String amount,
+    @RequestMapping(value = "/splitAsk", method = RequestMethod.GET)
+    public String splitAsk(@RequestParam(value = "transactionId", required = true) String transactionId,
+                           @RequestParam(value = "accountId", required = true) String accountId,
+                           @RequestParam(value = "amount", required = true) String amount,
                            Model model) {
         model.addAttribute("transactionId", transactionId)
         model.addAttribute("accountId", accountId)
@@ -79,6 +80,21 @@ class MvcController {
 
         response.status = HttpServletResponse.SC_CREATED
         return "splitView"
+    }
+
+    @RequestMapping(value = "/moneyAsk", method = RequestMethod.GET)
+    String moneyAsk(@RequestParam(value = "transactionId", required = true) String transactionId,
+                    @RequestParam(value = "amountToPay", required = true) String amountToPay,
+                    Model model) {
+        logger.info("Asking for the transaction " + transactionId)
+
+        //TODO retrieve information for view: Name of person, phone number, description of merchant, emoji, date
+        model.addAttribute("name", "Juan")
+        model.addAttribute("amountToPay", "4.15")
+        model.addAttribute("merchantDescription", "Starbucks")
+        model.addAttribute("dateTransaction", "17/04/2016")
+        model.addAttribute("timeTransaction", "12:21")
+        return "moneyAskView"
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

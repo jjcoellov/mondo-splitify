@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="../../favicon.ico"/>
+
+    <title>Split purchase</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+
+
+    <!-- Custom styles for this template -->
+    <link href="../css/jumbotron-narrow.css" rel="stylesheet"/>
+    <link href="../css/grid.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+    <div class="jumbotron">
+        <h2 class="alert alert-danger">Looks like you owe £<span th:text="${amountToPay}"/> to <span th:text="${name}"/> </h2>
+
+        <p class="lead">It was a purchase at <span th:text="${merchantDescription}"/>
+            on <span th:text="${dateTransaction}"/>
+            at <span th:text="${timeTransaction}"/></p>
+
+        <h4>Go and pay if you don't want to end up like Brian!</h4  >
+
+
+
+        <section class="row">
+            <div class="span6">
+                <div class="flex-video widescreen"><iframe src="https://www.youtube-nocookie.com/embed/ZomwVcGt0LE" frameborder="0" allowfullscreen=""></iframe></div>
+            </div>
+            <div class="span6">
+                ...
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="footer">
+        <p>&copy; Splitify, Inc.</p>
+    </footer>
+
+</div>
+<!-- /container -->
+
+</body>
+</html>
