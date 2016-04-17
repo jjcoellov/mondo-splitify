@@ -1,40 +1,46 @@
 package com.splitify.mvc.split
 
+import groovy.sql.Sql
 import org.springframework.stereotype.Repository
 
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.ResultSet
 import java.sql.SQLException
 
 @Repository
 class SplitRepository {
 
-    private Connection connection
+    private Sql sql
+
+    SplitRepository() {
+        getDbConnection()
+    }
 
     public void storeSplitRequestSent(SplitRequest splitRequest) {
         String friendList = listToString(splitRequest.friends)
+        getDbConnection()
+
         String query = """INSERT INTO splitrequest (transaction_id, account_id, friends_list)
                  VALUES ('${splitRequest.transactionId}', '${splitRequest.accountId}', '$friendList');
                 """
-        getDbConnection()
-        connection.createStatement().execute(query)
+        sql.execute(query)
     }
 
-    public SplitRequest retrieveSplitRequestByTransaction(String transactionId) {
-        String query = """SELECT * FROM splitrequest
-                 WHERE transaction_id = '$transactionId';
-                """
-        getDbConnection()
-        ResultSet result = connection.createStatement().executeQuery(query)
-        result.next()
-        return new SplitRequest(transactionId: result.getString("transaction_id"), accountId: result.getString("account_id"))
-    }
+//    public SplitRequest retrieveSplitRequestByTransaction(String transactionId) {
+//        String query = """SELECT * FROM splitrequest
+//                 WHERE transaction_id = '$transactionId';
+//                """
+//        SplitRequest result = new SplitRequest()
+//        sql.firstRow(query) { row ->
+//            result.transactionId = row.transaction_id
+//            result.accountId = row.account_id
+//        }
+//
+//        return result
+//    }
 
     private getDbConnection() throws URISyntaxException, SQLException {
-        if (!connection) {
+        if (!sql) {
             String dbUrl = System.getenv("JDBC_DATABASE_URL")
-            connection = DriverManager.getConnection(dbUrl)
+            sql = Sql.newInstance(dbUrl)
         }
     }
 
