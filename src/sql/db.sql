@@ -19,3 +19,7 @@ CREATE TABLE split_request_friend (
   amount BIGINT not null,
   status INT default 0
 );
+
+ALTER TABLE split_request ADD COLUMN currency VARCHAR(25) DEFAULT 'GBP';
+
+ALTER TABLE split_request_friend ADD COLUMN currency VARCHAR(25) DEFAULT 'GBP';
