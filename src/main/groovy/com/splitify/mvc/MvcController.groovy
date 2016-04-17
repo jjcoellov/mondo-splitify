@@ -59,7 +59,7 @@ class MvcController {
 
         feedService.sendSplitAsk(event)
 
-        response.status = HttpServletResponse.SC_ACCEPTED
+        response.status = HttpServletResponse.SC_OK
     }
 
     @RequestMapping(value = "/split", method = RequestMethod.POST)

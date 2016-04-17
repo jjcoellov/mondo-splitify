@@ -3,6 +3,7 @@ package com.splitify.mvc.feed
 import com.splitify.mvc.client.MondoAPIClient
 import com.splitify.mvc.friends.Friend
 import com.splitify.mvc.friends.FriendsRepository
+import com.splitify.mvc.transaction.TransactionHelper
 import com.splitify.mvc.webhook.WebhookEvent
 import groovyx.net.http.RESTClient
 import org.apache.log4j.LogManager
@@ -30,7 +31,8 @@ class FeedService {
 
         def accountId = transaction.accountId
         def accessToken = friendsRepository.getFriendByAccountId(accountId).accessToken
-        def title = "Do you want to split your ${transaction.amount} ${transaction.currency} transaction?"
+        def amount = TransactionHelper.prettifyAmount(transaction.amount)
+        def title = "Do you want to split your ${amount} ${transaction.currency} transaction?"
         def transactionId = transaction.transactionId
 
         def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}"
@@ -42,6 +44,7 @@ class FeedService {
 
         def accountId = friend.accountId
         def accessToken = friend.accessToken
+        amount = TransactionHelper.prettifyAmount(amount)
         def title = "Where is my money ($amount £) ?"
 
         def url = "http://google.com"
