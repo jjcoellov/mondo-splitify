@@ -40,7 +40,7 @@ class SplitService {
             feedService.askMoneyToFriend(friend, amountPerFriend)
         }
 
-//        splitRepository.storeSplitRequestSent(splitRequest)
+        splitRepository.storeSplitRequestSent(splitRequest)
     }
 
 }
