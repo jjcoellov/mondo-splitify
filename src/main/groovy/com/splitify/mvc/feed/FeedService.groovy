@@ -18,6 +18,8 @@ class FeedService {
 
     private static final Logger logger = LogManager.getLogger(FeedService);
 
+    private static final String splitify_icon_URL = "http://i.imgur.com/CkVKAZp.png"
+
     @Autowired
     FriendsRepository friendsRepository
 
@@ -35,10 +37,10 @@ class FeedService {
         logger.info("Creating split ask feed for account $accountId")
 
         def amount = TransactionHelper.prettifyAmount(transaction.amount)
-        def title = "Do you want to split your ${amount} ${transaction.currency} transaction?"
+        def title = "Split ${transaction.currency} ${amount} from ${transaction.merchantName}"
 
         def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}&amount=${amount}" //TODO dynamic base URL
-        sendFeed(accountId,title,url,"http://i.imgur.com/CkVKAZp.png", accessToken)
+        sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
     }
 
     void askMoneyToFriend(Friend friend, def amount, def currency = "£") {
@@ -49,8 +51,8 @@ class FeedService {
         amount = TransactionHelper.prettifyAmount(amount)
         def title = "Where is my money ($amount $currency) ?"
 
-        def url = "http://google.com"
-        sendFeed(accountId,title,url,"http://i.imgur.com/gkWkTtI.gif", accessToken)
+        def url = "https://mondo-splitify.herokuapp.com/moneyAsk?transactionId=tx_000097FzXh4Q2VkGFdUbS5&amountToPay=4.87"
+        sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
     }
 
     private sendFeed(String accountId,String title, String URL, String imageURL, String accessToken = null) {

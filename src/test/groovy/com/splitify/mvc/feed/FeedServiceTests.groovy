@@ -20,7 +20,7 @@ class FeedServiceTests {
     @Test
     void sendSplitAskFeed() {
 
-        WebhookEvent transaction = new WebhookEvent(accountId: "acc_000097FrOUX6U6VVkwnMnp", amount: 100, currency: "£" )
+        WebhookEvent transaction = new WebhookEvent(accountId: "acc_000097FrOUX6U6VVkwnMnp", amount: 100, currency: "£" , merchantName: "Casa Chano" )
 
         new FeedService(friendsRepository: new FriendsRepository()).sendSplitAsk(transaction)
         assert true
@@ -29,7 +29,7 @@ class FeedServiceTests {
     @Test
     void sendAskMoneyFeed() {
 
-        WebhookEvent transaction = new WebhookEvent(accountId: "acc_000097FrOUX6U6VVkwnMnp", amount: 100, currency: "£" )
+        WebhookEvent transaction = new WebhookEvent(accountId: "acc_000097FrOUX6U6VVkwnMnp", amount: 100, currency: "£", merchantName: "Casa Chano")
 
         Friend friend = new Friend(
                 id: "user_000097FrGKVVsMZwLU9x4b",
