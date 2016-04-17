@@ -29,9 +29,11 @@
     <div class="jumbotron">
         <h2 class="alert alert-danger">Looks like you owe £<span th:text="${amountToPay}"/> to <span th:text="${name}"/> </h2>
 
-        <p class="lead">It was a purchase at <span th:text="${merchantDescription}"/>
+        <p class="lead">It was a purchase at <span th:text="${merchantName}"/>
             on <span th:text="${dateTransaction}"/>
             at <span th:text="${timeTransaction}"/></p>
+
+        <p>You can send the money using the following phone number: <span th:text="${phoneNumber}"/></p>
 
         <h4>Go and pay if you don't want to end up like Brian!</h4  >
 

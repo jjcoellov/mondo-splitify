@@ -88,10 +88,11 @@ class MvcController {
                     Model model) {
         logger.info("Asking for the transaction " + transactionId)
 
-        //TODO retrieve information for view: Name of person, phone number, description of merchant, emoji, date
+        //TODO retrieve information for view: Name of person, phone number, description of merchant, date
         model.addAttribute("name", "Juan")
-        model.addAttribute("amountToPay", "4.15")
-        model.addAttribute("merchantDescription", "Starbucks")
+        model.addAttribute("amountToPay", amountToPay)
+        model.addAttribute("phoneNumber", "+447557932500")
+        model.addAttribute("merchantName", "Starbucks")
         model.addAttribute("dateTransaction", "17/04/2016")
         model.addAttribute("timeTransaction", "12:21")
         return "moneyAskView"
