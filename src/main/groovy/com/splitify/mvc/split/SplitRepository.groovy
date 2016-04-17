@@ -15,13 +15,15 @@ class SplitRepository {
     }
 
     public void storeSplitRequestSent(SplitRequest splitRequest) {
-        String friendList = listToString(splitRequest.friends)
-        getDbConnection()
+        if (isDBActive()) {
+            String friendList = listToString(splitRequest.friends)
+            getDbConnection()
 
-        String query = """INSERT INTO splitrequest (transaction_id, account_id, friends_list)
+            String query = """INSERT INTO splitrequest (transaction_id, account_id, friends_list)
                  VALUES ('${splitRequest.transactionId}', '${splitRequest.accountId}', '$friendList');
                 """
-        sql.execute(query)
+            sql.execute(query)
+        }
     }
 
 //    public SplitRequest retrieveSplitRequestByTransaction(String transactionId) {
@@ -38,7 +40,7 @@ class SplitRepository {
 //    }
 
     private getDbConnection() throws URISyntaxException, SQLException {
-        if (!sql) {
+        if (isDBActive() && !sql) {
             String dbUrl = System.getenv("JDBC_DATABASE_URL")
             sql = Sql.newInstance(dbUrl)
         }
@@ -48,6 +50,10 @@ class SplitRepository {
         String result = ""
         list.each { it -> result += it + ", "}
         return result
+    }
+
+    private boolean isDBActive() {
+        return System.getenv("JDBC_DATABASE_URL")
     }
 
 }
