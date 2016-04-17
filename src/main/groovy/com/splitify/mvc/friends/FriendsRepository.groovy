@@ -17,7 +17,7 @@ class FriendsRepository {
                     id: "user_000097Fr4zvQ3koVSpNBXV",
                     name: "Alejandro",
                     accountId: "acc_000097FrDMDP4MMq94UFRB",
-                    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0NjA5OTgzNTUsImlhdCI6MTQ2MDgyNTU1NSwianRpIjoidG9rXzAwMDA5N0dMUTFzSjBFMlk0eE1UeTUiLCJ1aSI6InVzZXJfMDAwMDk3RnI0enZRM2tvVlNwTkJYViIsInYiOiI0In0.FwnLKezbvnOFKYjoWETt6stmGFDM0FCyy32eDqqXLG0",
+                    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0NjEwNzY0ODMsImlhdCI6MTQ2MDkwMzY4MywianRpIjoidG9rXzAwMDA5N0lEZDA5NEtsb0xFZEVTUDMiLCJ1aSI6InVzZXJfMDAwMDk3RnI0enZRM2tvVlNwTkJYViIsInYiOiI0In0.pG2-HAz9kiJwROD-9lpK4z1wE4ACr6YdxDgQqufq980",
                     phoneNumber: "+447820707071"
             ),
             new Friend(
