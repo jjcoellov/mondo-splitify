@@ -96,13 +96,16 @@ class MvcController {
 
         Friend owner = friendsRepository.getFriendByAccountId(ownerAccountId)
         def transaction = transactionService.retrieveTransaction(owner.accessToken, transactionId)
+        String settledDate = transaction.settled
+        def date = settledDate.substring(0, settledDate.indexOf("T"))
+        def time = settledDate.substring(settledDate.indexOf("T") + 1, settledDate.indexOf("."))
 
         model.addAttribute("name", owner.name)
         model.addAttribute("amountToPay", amountToPay)
         model.addAttribute("phoneNumber", owner.phoneNumber)
         model.addAttribute("merchantName", transaction.merchant?.name)
-        model.addAttribute("dateTransaction", transaction.settled)
-        model.addAttribute("timeTransaction", "16:21")
+        model.addAttribute("dateTransaction", date)
+        model.addAttribute("timeTransaction", time)
         return "moneyAskView"
     }
 
