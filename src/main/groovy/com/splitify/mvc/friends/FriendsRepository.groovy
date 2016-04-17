@@ -28,7 +28,7 @@ class FriendsRepository {
                     id: "user_000097Fz6bciBPd8EyptDN",
                     name: "Esau",
                     accountId: "acc_000097GCbnqw3xhSmzmntR",
-                    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0NjA5OTg0MTUsImlhdCI6MTQ2MDgyNTYxNSwianRpIjoidG9rXzAwMDA5N0dMVllrMEVjQ2ZTWDdDOUIiLCJ1aSI6InVzZXJfMDAwMDk3Rno2YmNpQlBkOEV5cHRETiIsInYiOiI0In0.eCCoV8pYyMhs_QGp6kKQ9wIPMCMW-XU0FQnjaW9KR-U"
+                    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaSI6Im9hdXRoY2xpZW50XzAwMDA5NFB2SU5ER3pUM2s2dHo4anAiLCJleHAiOjE0NjEwNjQ0MjAsImlhdCI6MTQ2MDg5MTYyMCwianRpIjoidG9rXzAwMDA5N0h2Z1dFdGZSN2xUcWNGczEiLCJ1aSI6InVzZXJfMDAwMDk3Rno2YmNpQlBkOEV5cHRETiIsInYiOiI0In0.VU_wnBmxaWENy2GsYx7uLUFd23xSRJE7GtsWAv9Z9wA"
             )
     ]
 
