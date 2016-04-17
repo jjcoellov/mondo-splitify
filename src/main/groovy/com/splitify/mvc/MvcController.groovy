@@ -58,7 +58,7 @@ class MvcController {
         WebhookEvent event = WebhookEvent.parse(payload)
         logger.info(event)
 
-        if (isSplitApplicable(event)) {
+        if (isSplitApplicable(event)) { //TODO it should be in a service later
             feedService.sendSplitAsk(event)
         }
 
