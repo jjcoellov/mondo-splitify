@@ -23,12 +23,10 @@ class SplitService {
     @Autowired
     FeedService feedService
 
-    @Autowired
-    SplitRepository splitRepository
-
     def split(SplitRequest splitRequest) {
 
         String accessToken = friendRepository.getFriendByAccountId(splitRequest.accountId).accessToken
+        String transactionId = splitRequest.transactionId
         Integer amount = transactionService.retrieveTransactionAmount(accessToken, splitRequest.transactionId)
 
         List<Friend> friendsToSplit = friendRepository.retrieveFriends(splitRequest.friends)
@@ -37,10 +35,8 @@ class SplitService {
 
         friendsToSplit.each { friend ->
             logger.info(friend.name + " will be notified to pay " + amountPerFriend)
-            feedService.askMoneyToFriend(friend, amountPerFriend)
+            feedService.askMoneyToFriend(friend, transactionId, amountPerFriend)
         }
-
-        splitRepository.storeSplitRequestSent(splitRequest)
     }
 
 }

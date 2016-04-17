@@ -43,7 +43,7 @@ class FeedService {
         sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
     }
 
-    void askMoneyToFriend(Friend friend, def amount, def currency = "£") {
+    void askMoneyToFriend(Friend friend, String transactionId, def amount, def currency = "£") {
         logger.info("Creating money back to friend")
 
         def accountId = friend.accountId
@@ -51,7 +51,7 @@ class FeedService {
         amount = TransactionHelper.prettifyAmount(amount)
         def title = "Where is my money ($amount $currency) ?"
 
-        def url = "https://mondo-splitify.herokuapp.com/moneyAsk?transactionId=tx_000097FzXh4Q2VkGFdUbS5&amountToPay=4.87"
+        def url = "https://mondo-splitify.herokuapp.com/moneyAsk?transactionId=$transactionId&ownerAccountId=$accountId&amountToPay=$amount"
         sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
     }
 
