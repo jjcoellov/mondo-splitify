@@ -28,7 +28,7 @@ class SplitRepository {
         getDbConnection()
         ResultSet result = connection.createStatement().executeQuery(query)
         result.next()
-        return new SplitRequest(transactionId: result.getString("transacion_id"), accountId: result.getString("account_id"))
+        return new SplitRequest(transactionId: result.getString("transaction_id"), accountId: result.getString("account_id"))
     }
 
     private getDbConnection() throws URISyntaxException, SQLException {
