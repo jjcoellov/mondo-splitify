@@ -100,8 +100,8 @@ class MvcController {
         model.addAttribute("name", owner.name)
         model.addAttribute("amountToPay", amountToPay)
         model.addAttribute("phoneNumber", owner.phoneNumber)
-        model.addAttribute("merchantName", transaction.data.merchant?.name)
-        model.addAttribute("dateTransaction", transaction.data.merchant?.settled)
+        model.addAttribute("merchantName", transaction.merchant?.name)
+        model.addAttribute("dateTransaction", transaction.merchant?.settled)
         model.addAttribute("timeTransaction", "12:21")
         return "moneyAskView"
     }
