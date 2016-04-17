@@ -1,10 +1,12 @@
 package com.splitify.mvc
 
 import com.splitify.mvc.feed.FeedService
+import com.splitify.mvc.friends.Friend
 import com.splitify.mvc.friends.FriendsRepository
 import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.split.SplitService
 import com.splitify.mvc.transaction.TransactionHelper
+import com.splitify.mvc.transaction.TransactionService
 import com.splitify.mvc.webhook.WebhookEvent
 import com.splitify.mvc.webhook.WebhookService
 import org.apache.log4j.LogManager
@@ -34,6 +36,9 @@ class MvcController {
 
     @Autowired
     FriendsRepository friendsRepository
+
+    @Autowired
+    TransactionService transactionService
 
     @Autowired
     WebhookService webhookService
@@ -84,16 +89,19 @@ class MvcController {
 
     @RequestMapping(value = "/moneyAsk", method = RequestMethod.GET)
     String moneyAsk(@RequestParam(value = "transactionId", required = true) String transactionId,
+                    @RequestParam(value = "ownerAccountId", required = true) String ownerAccountId,
                     @RequestParam(value = "amountToPay", required = true) String amountToPay,
                     Model model) {
         logger.info("Asking for the transaction " + transactionId)
 
-        //TODO retrieve information for view: Name of person, phone number, description of merchant, date
-        model.addAttribute("name", "Juan")
+        Friend owner = friendsRepository.getFriendByAccountId(ownerAccountId)
+        def transaction = transactionService.retrieveTransaction(owner.accessToken, transactionId)
+
+        model.addAttribute("name", owner.name)
         model.addAttribute("amountToPay", amountToPay)
-        model.addAttribute("phoneNumber", "+447557932500")
-        model.addAttribute("merchantName", "Starbucks")
-        model.addAttribute("dateTransaction", "17/04/2016")
+        model.addAttribute("phoneNumber", owner.phoneNumber)
+        model.addAttribute("merchantName", transaction.data.merchant?.name)
+        model.addAttribute("dateTransaction", transaction.data.merchant?.settled)
         model.addAttribute("timeTransaction", "12:21")
         return "moneyAskView"
     }

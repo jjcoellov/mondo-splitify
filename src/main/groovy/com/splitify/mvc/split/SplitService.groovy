@@ -35,7 +35,7 @@ class SplitService {
 
         friendsToSplit.each { friend ->
             logger.info(friend.name + " will be notified to pay " + amountPerFriend)
-            feedService.askMoneyToFriend(friend, transactionId, amountPerFriend)
+            feedService.askMoneyToFriend(splitRequest.accountId, friend, transactionId, amountPerFriend)
         }
     }
 
