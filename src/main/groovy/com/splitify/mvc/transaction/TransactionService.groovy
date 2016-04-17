@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service
 @Service
 class TransactionService {
 
-    Integer retrieveTransactionAmount(String accessToken, String transactionId) {
+    Integer retrieveTransaction(String accessToken, String transactionId) {
 
         def response = new MondoAPIClient(accessToken).get(
                 path: "/transactions/$transactionId",
         )
 
-        return response.responseData.transaction.amount ?: 0
+        return response.responseData.transaction
     }
 
 }
