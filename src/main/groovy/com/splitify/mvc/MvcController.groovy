@@ -4,6 +4,7 @@ import com.splitify.mvc.feed.FeedService
 import com.splitify.mvc.friends.FriendsRepository
 import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.split.SplitService
+import com.splitify.mvc.transaction.TransactionHelper
 import com.splitify.mvc.webhook.WebhookEvent
 import com.splitify.mvc.webhook.WebhookService
 import org.apache.log4j.LogManager
@@ -46,9 +47,11 @@ class MvcController {
     @RequestMapping("/splitAsk")
     public String splitAsk(@RequestParam(value="transactionId", required=true) String transactionId,
                            @RequestParam(value="accountId", required=true) String accountId,
+                           @RequestParam(value="amount", required=true) String amount,
                            Model model) {
         model.addAttribute("transactionId", transactionId)
         model.addAttribute("accountId", accountId)
+        model.addAttribute("amount", amount)
         model.addAttribute("myFriends", friendsRepository.retrieveFriendsExcludingByAccount(accountId))
         model.addAttribute("splitRequest", new SplitRequest())
         return "splitAskView"
@@ -61,7 +64,9 @@ class MvcController {
         WebhookEvent event = WebhookEvent.parse(payload)
         logger.info(event)
 
-        feedService.sendSplitAsk(event)
+        if (isSplitApplicable(event)) { //TODO it should be in a service later
+            feedService.sendSplitAsk(event)
+        }
 
         response.status = HttpServletResponse.SC_OK
     }
@@ -90,6 +95,9 @@ class MvcController {
             webhookService.unregisterWebhook(friend)
         }
         response.status = HttpServletResponse.SC_OK
+
+    private boolean isSplitApplicable(WebhookEvent webhookEvent) {
+        return TransactionHelper.isDebit(webhookEvent.amount)
     }
 }
 
