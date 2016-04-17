@@ -6,7 +6,7 @@ CREATE TABLE split_request (
 );
 
 CREATE TABLE friend (
-  friend_id serial PRIMARY KEY,
+  friend_id VARCHAR(200) not null,
   name VARCHAR(200) not null,
   account_id VARCHAR(200) not null,
   access_token VARCHAR(1000) not null,
