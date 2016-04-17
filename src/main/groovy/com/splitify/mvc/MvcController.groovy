@@ -95,6 +95,7 @@ class MvcController {
             webhookService.unregisterWebhook(friend)
         }
         response.status = HttpServletResponse.SC_OK
+    }
 
     private boolean isSplitApplicable(WebhookEvent webhookEvent) {
         return TransactionHelper.isDebit(webhookEvent.amount)
