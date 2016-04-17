@@ -27,15 +27,17 @@ class FeedService {
     }
 
     void sendSplitAsk(WebhookEvent transaction) {
-        logger.info("Creating split ask feed for account")
 
         def accountId = transaction.accountId
-        def accessToken = friendsRepository.getFriendByAccountId(accountId).accessToken
-        def amount = TransactionHelper.prettifyAmount(transaction.amount)
-        def title = "Do you want to split your ${amount} ${transaction.currency} transaction?"
+        def accessToken = friendsRepository.getFriendByAccountId(accountId).accessToken //TODO should be provided in another way
         def transactionId = transaction.transactionId
 
-        def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}"
+        logger.info("Creating split ask feed for account $accountId")
+
+        def amount = TransactionHelper.prettifyAmount(transaction.amount)
+        def title = "Do you want to split your ${amount} ${transaction.currency} transaction?"
+
+        def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}" //TODO dynamic base URL
         sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
     }
 
