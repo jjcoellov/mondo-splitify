@@ -1,8 +1,9 @@
 package com.splitify.mvc.split
 
+import spock.lang.Ignore
 import spock.lang.Specification
 
-
+@Ignore
 class SplitRespositoryTest extends Specification {
 
     private SplitRepository splitRepository = new SplitRepository()
