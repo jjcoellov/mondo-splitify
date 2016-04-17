@@ -2,23 +2,24 @@ package com.splitify.mvc.friends
 
 import javax.persistence.*;
 
-//@Entity
+@Entity(name="friend")
 class FriendEntity implements Serializable {
 
-//    @Id
-//    @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name="friend_id", nullable = false)
     Long friendId
 
-//    @Column(nullable = false)
+    @Column(name="name", nullable = false)
     String name
 
-//    @Column(nullable = false)
+    @Column(name="account_id", nullable = false)
     String accountId
 
-//    @Column(nullable = false)
+    @Column(name="access_token", nullable = false)
     String accessToken
 
-//    @Column(nullable = false)
+    @Column(name="phone_number", nullable = false)
     String phoneNumber
 
 }
