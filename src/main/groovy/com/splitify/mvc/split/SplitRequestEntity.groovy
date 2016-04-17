@@ -4,11 +4,11 @@ import com.splitify.mvc.friends.FriendEntity
 
 import javax.persistence.*
 
-@Entity
+//@Entity
 class SplitRequestEntity implements Serializable {
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     Long id
 
     String transactionId
