@@ -18,6 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="../css/jumbotron-narrow.css" rel="stylesheet"/>
     <link href="../css/grid.css" rel="stylesheet"/>
+    <script src="../js/onsubmit_event.js"></script>
 
 </head>
 
@@ -27,11 +28,11 @@
 
 
     <div class="jumbotron">
-        <h2>Split your purchase</h2>
+        <h2>Split your purchase of £<span th:text="${amount}"/></h2>
 
-        <p class="lead">Choose who owns you money!</p>
+        <p class="lead">Choose who owes you money!</p>
 
-        <form action="#" th:action="@{/split}" th:object="${splitRequest}" method="post">
+        <form action="#" th:action="@{/split}" th:object="${splitRequest}" method="post" onsubmit="return ValidationEvent()">
             <input type="hidden" th:value="${transactionId}" name="transactionId" />
             <input type="hidden" th:value="${accountId}" name="accountId" />
             <div class="row">
@@ -52,6 +53,8 @@
 
             <p><input type="submit" value="Split" class="btn btn-lg btn-primary" role="button"/></p>
         </form>
+
+        <p id="errorMessage" class="hidden">Don't be shy, select at least 1 friend</p>
     </div>
 
 
