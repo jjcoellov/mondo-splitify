@@ -10,4 +10,6 @@ class Friend {
 
     String accessToken
 
+    String phoneNumber
+
 }

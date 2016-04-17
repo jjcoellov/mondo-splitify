@@ -36,8 +36,9 @@ class FeedService {
 
         logger.info("Creating split ask feed for account $accountId")
 
+        def currency = "£" //TODO convert from transaction.currency to symbol
         def amount = TransactionHelper.prettifyAmount(transaction.amount)
-        def title = "Split ${transaction.currency} ${amount} from ${transaction.merchantName}"
+        def title = "Split ${currency}${amount} from ${transaction.merchantName}"
 
         def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}&amount=${amount}" //TODO dynamic base URL
         sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
@@ -49,7 +50,7 @@ class FeedService {
         def accountId = friend.accountId
         def accessToken = friend.accessToken
         amount = TransactionHelper.prettifyAmount(amount)
-        def title = "Where is my money ($amount $currency) ?"
+        def title = "Juan Manuel Barroso: Where is my money ($currency$amount)?"
 
         def url = "https://mondo-splitify.herokuapp.com/moneyAsk?transactionId=$transactionId&ownerAccountId=$accountId&amountToPay=$amount"
         sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
