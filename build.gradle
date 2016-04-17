@@ -26,6 +26,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile('org.codehaus.groovy:groovy-all')
     compile('org.codehaus.groovy.modules.http-builder:http-builder:0.7')
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.codehaus.groovy:groovy-all:2.4.4'

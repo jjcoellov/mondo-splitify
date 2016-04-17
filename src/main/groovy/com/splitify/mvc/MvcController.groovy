@@ -6,6 +6,7 @@ import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.split.SplitService
 import com.splitify.mvc.transaction.TransactionHelper
 import com.splitify.mvc.webhook.WebhookEvent
+import com.splitify.mvc.webhook.WebhookService
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,6 +34,9 @@ class MvcController {
 
     @Autowired
     FriendsRepository friendsRepository
+
+    @Autowired
+    WebhookService webhookService
 
     @RequestMapping(value = "/")
     def @ResponseBody hello() {
@@ -77,10 +81,24 @@ class MvcController {
         return "splitView"
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    void register(HttpServletResponse response) {
+        friendsRepository.friends.each { friend ->
+            webhookService.registerWebhook(friend)
+        }
+        response.status = HttpServletResponse.SC_OK
+    }
+
+    @RequestMapping(value = "/unregister", method = RequestMethod.POST)
+    void unregister(HttpServletResponse response) {
+        friendsRepository.friends.each { friend ->
+            webhookService.unregisterWebhook(friend)
+        }
+        response.status = HttpServletResponse.SC_OK
+    }
+
     private boolean isSplitApplicable(WebhookEvent webhookEvent) {
-
         return TransactionHelper.isDebit(webhookEvent.amount)
-
     }
 }
 

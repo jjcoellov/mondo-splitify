@@ -27,8 +27,8 @@ class WebhookEvent {
                 accountId: parsedNotification.data.account_id,
                 transactionId: parsedNotification.data.id,
                 description: parsedNotification.data.description,
-                merchantName: parsedNotification.data.merchant.name,
-                merchantAddress: parsedNotification.data.merchant.address.short_formatted,
+                merchantName: parsedNotification.data.merchant?.name,
+                merchantAddress: parsedNotification.data.merchant?.address?.short_formatted,
                 amount: parsedNotification.data.amount,
                 currency: parsedNotification.data.currency
         )
