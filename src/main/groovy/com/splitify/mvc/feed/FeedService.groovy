@@ -22,7 +22,7 @@ class FeedService {
 
     void createDummyFeed(String accountId, String accessToken = null) {
         logger.info("Creating feed for account $accountId")
-        sendFeed(accountId,"test","http://google.com","http://www.nyan.cat/cats/original.gif",accessToken)
+        sendFeed(accountId,"Just a Dummy Feed","http://google.com","http://www.nyan.cat/cats/original.gif",accessToken)
     }
 
     void sendSplitAsk(WebhookEvent transaction) {
