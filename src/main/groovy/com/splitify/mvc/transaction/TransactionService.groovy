@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service
 @Service
 class TransactionService {
 
-
     Integer retrieveTransactionAmount(String accessToken, String transactionId) {
 
         def response = new MondoAPIClient(accessToken).get(
