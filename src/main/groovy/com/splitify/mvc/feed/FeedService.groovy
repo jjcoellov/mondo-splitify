@@ -41,16 +41,16 @@ class FeedService {
         sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
     }
 
-    void askMoneyToFriend(Friend friend, def amount) {
+    void askMoneyToFriend(Friend friend, def amount, def currency = "£") {
         logger.info("Creating money back to friend")
 
         def accountId = friend.accountId
         def accessToken = friend.accessToken
         amount = TransactionHelper.prettifyAmount(amount)
-        def title = "Where is my money ($amount £) ?"
+        def title = "Where is my money ($amount $currency) ?"
 
         def url = "http://google.com"
-        sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
+        sendFeed(accountId,title,url,"http://i.imgur.com/gkWkTtI.gif", accessToken)
     }
 
     private sendFeed(String accountId,String title, String URL, String imageURL, String accessToken = null) {
