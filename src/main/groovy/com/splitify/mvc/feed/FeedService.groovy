@@ -44,13 +44,13 @@ class FeedService {
         sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
     }
 
-    void askMoneyToFriend(String ownerAccountId, Friend friend, String transactionId, def amount, def currency = "£") {
+    void askMoneyToFriend(String ownerName, String ownerAccountId, Friend friend, String transactionId, def amount, def currency = "£") {
         logger.info("Creating money back to friend")
 
         def accountId = friend.accountId
         def accessToken = friend.accessToken
         amount = TransactionHelper.prettifyAmount(amount)
-        def title = "Juan Manuel Barroso: Where is my money ($currency$amount)?"
+        def title = "$ownerName: Where is my money ($currency$amount)?"
 
         def url = "https://mondo-splitify.herokuapp.com/moneyAsk?transactionId=$transactionId&ownerAccountId=$ownerAccountId&amountToPay=$amount"
         sendFeed(accountId,title,url,splitify_icon_URL, accessToken)
