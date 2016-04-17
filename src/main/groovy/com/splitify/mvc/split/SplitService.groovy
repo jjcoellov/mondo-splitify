@@ -23,6 +23,9 @@ class SplitService {
     @Autowired
     FeedService feedService
 
+    @Autowired
+    SplitRepository splitRepository
+
     def split(SplitRequest splitRequest) {
 
         String accessToken = friendRepository.getFriendByAccountId(splitRequest.accountId).accessToken
@@ -37,7 +40,7 @@ class SplitService {
             feedService.askMoneyToFriend(friend, amountPerFriend)
         }
 
-        // persist split operation
+        splitRepository.storeSplitRequestSent(splitRequest)
     }
 
 }
