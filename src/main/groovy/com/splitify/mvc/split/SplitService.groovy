@@ -27,7 +27,7 @@ class SplitService {
 
         String accessToken = friendRepository.getFriendByAccountId(splitRequest.accountId).accessToken
         String transactionId = splitRequest.transactionId
-        def amount = transactionService.retrieveTransaction(accessToken, splitRequest.transactionId).amount
+        Integer amount = transactionService.retrieveTransaction(accessToken, splitRequest.transactionId).amount
 
         List<Friend> friendsToSplit = friendRepository.retrieveFriends(splitRequest.friends)
 
