@@ -42,9 +42,11 @@ class MvcController {
     @RequestMapping("/splitAsk")
     public String splitAsk(@RequestParam(value="transactionId", required=true) String transactionId,
                            @RequestParam(value="accountId", required=true) String accountId,
+                           @RequestParam(value="amount", required=true) String amount,
                            Model model) {
         model.addAttribute("transactionId", transactionId)
         model.addAttribute("accountId", accountId)
+        model.addAttribute("amount", amount)
         model.addAttribute("myFriends", friendsRepository.retrieveFriendsExcludingByAccount(accountId))
         model.addAttribute("splitRequest", new SplitRequest())
         return "splitAskView"
