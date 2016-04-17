@@ -25,7 +25,8 @@ class SplitService {
 
     def split(SplitRequest splitRequest) {
 
-        String accessToken = friendRepository.getFriendByAccountId(splitRequest.accountId).accessToken
+        Friend friendOwner = friendRepository.getFriendByAccountId(splitRequest.accountId)
+        String accessToken = friendOwner.accessToken
         String transactionId = splitRequest.transactionId
         Integer amount = transactionService.retrieveTransaction(accessToken, splitRequest.transactionId).amount
 
@@ -35,7 +36,7 @@ class SplitService {
 
         friendsToSplit.each { friend ->
             logger.info(friend.name + " will be notified to pay " + amountPerFriend)
-            feedService.askMoneyToFriend(splitRequest.accountId, friend, transactionId, amountPerFriend)
+            feedService.askMoneyToFriend(friendOwner.name, splitRequest.accountId, friend, transactionId, amountPerFriend)
         }
     }
 
