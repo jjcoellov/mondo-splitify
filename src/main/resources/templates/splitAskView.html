@@ -35,22 +35,30 @@
         <form action="#" th:action="@{/split}" th:object="${splitRequest}" method="post" onsubmit="return ValidationEvent()">
             <input type="hidden" th:value="${transactionId}" name="transactionId" />
             <input type="hidden" th:value="${accountId}" name="accountId" />
-            <div class="row">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Friends:</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="friend : ${myFriends}">
-                        <td th:text="${friend.name}"></td>
-                        <td><input type="checkbox" th:field="*{friends}" th:value="${friend.id}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
 
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h4 class="panel-title">Friends</h4> </div>
+
+                <div class="panel-body">
+
+                    <table class="table">
+                        <tbody>
+                        <tr th:each="friend : ${myFriends}">
+                            <td th:text="${friend.name}"></td>
+                            <td><input type="checkbox" th:field="*{friends}" th:value="${friend.id}"/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+            </div>
             <p><input type="submit" value="Split" class="btn btn-lg btn-primary" role="button"/></p>
         </form>
 
