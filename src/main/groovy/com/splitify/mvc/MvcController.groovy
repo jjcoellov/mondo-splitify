@@ -4,6 +4,7 @@ import com.splitify.mvc.feed.FeedService
 import com.splitify.mvc.friends.FriendsRepository
 import com.splitify.mvc.split.SplitRequest
 import com.splitify.mvc.split.SplitService
+import com.splitify.mvc.transaction.TransactionHelper
 import com.splitify.mvc.webhook.WebhookEvent
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
@@ -57,7 +58,9 @@ class MvcController {
         WebhookEvent event = WebhookEvent.parse(payload)
         logger.info(event)
 
-        feedService.sendSplitAsk(event)
+        if (isSplitApplicable(event)) {
+            feedService.sendSplitAsk(event)
+        }
 
         response.status = HttpServletResponse.SC_OK
     }
@@ -70,6 +73,12 @@ class MvcController {
 
         response.status = HttpServletResponse.SC_CREATED
         return "splitView"
+    }
+
+    private boolean isSplitApplicable(WebhookEvent webhookEvent) {
+
+        return TransactionHelper.isDebit(webhookEvent.amount)
+
     }
 }
 

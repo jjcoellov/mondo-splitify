@@ -29,5 +29,28 @@ class TransactionHelperTests {
 
     }
 
+    @Test
+    void "negative amounts should be considered  debit"() {
+
+        BigInteger amount = -1
+
+        def isDebit = TransactionHelper.isDebit(amount)
+
+        assert isDebit
+
+    }
+
+    @Test
+    void "positive amounts should NOT be considered  debit"() {
+
+        BigInteger amount = 1
+
+        def isDebit = TransactionHelper.isDebit(amount)
+
+        assert isDebit == false
+
+    }
+
+
 
 }

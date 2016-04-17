@@ -7,4 +7,8 @@ class TransactionHelper {
         return new BigDecimal(amount,2).abs()
 
     }
+
+    static Boolean isDebit(BigInteger amount) {
+        return (amount <= 0)
+    }
 }
