@@ -10,6 +10,9 @@ class TransactionService {
 
         def response = new MondoAPIClient(accessToken).get(
                 path: "/transactions/$transactionId",
+                query: [
+                        "expand[]": "merchant"
+                ]
         )
 
         return response.responseData.transaction
