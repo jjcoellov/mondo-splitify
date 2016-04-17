@@ -17,22 +17,32 @@ class WebhookService {
     void registerWebhook(Friend friend) {
         logger.info("Registering webhook for user ${friend.name} (account: ${friend.accountId})")
 
-        def webhook = findWebhook(friend)
-        if (webhook) {
-            logger.info("Webhook found for the application. Skipping")
-        } else {
-            doRegister(friend)
-            logger.info("Webhook registered")
+        try {
+            def webhook = findWebhook(friend)
+            if (webhook) {
+                logger.info("Webhook found for the application. Skipping")
+            } else {
+                doRegister(friend)
+                logger.info("Webhook registered")
+            }
+        } catch (Exception exception) {
+            logger.error("Error attempting to unregister webhook for user ${friend.name} (${friend.id})", exception)
         }
     }
 
     void unregisterWebhook(Friend friend) {
-        def webhook = findWebhook(friend)
-         if (webhook) {
-             doUnregister(friend, webhook.id)
-             logger.info("Webhook deleted")
-        } else {
-             logger.info("Webhook not found for the application. Skipping")
+        logger.info("Unegistering webhook for user ${friend.name} (account: ${friend.accountId})")
+
+        try {
+            def webhook = findWebhook(friend)
+            if (webhook) {
+                doUnregister(friend, webhook.id)
+                logger.info("Webhook deleted")
+            } else {
+                logger.info("Webhook not found for the application. Skipping")
+            }
+        } catch (Exception exception) {
+            logger.error("Error attempting to unregister webhook for user ${friend.name} (${friend.id})", exception)
         }
     }
 

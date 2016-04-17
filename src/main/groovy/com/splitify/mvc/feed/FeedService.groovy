@@ -38,7 +38,7 @@ class FeedService {
         def title = "Do you want to split your ${amount} ${transaction.currency} transaction?"
 
         def url = "https://mondo-splitify.herokuapp.com/splitAsk?transactionId=${transactionId}&accountId=${accountId}&amount=${amount}" //TODO dynamic base URL
-        sendFeed(accountId,title,url,"http://www.nyan.cat/cats/original.gif", accessToken)
+        sendFeed(accountId,title,url,"http://imgur.com/CkVKAZp", accessToken)
     }
 
     void askMoneyToFriend(Friend friend, def amount, def currency = "£") {
